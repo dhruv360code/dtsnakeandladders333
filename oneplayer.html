@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=0.65">
+  <title>SnakeLadder1</title>
+</head>
+<style>
+  /* *{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  } */
+  /* canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 20px;
+  height: 100vh;
+    display: block;
+   
+  } */
+/*
+  canvas {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction: column;
+         height: 100vh;
+         position: relative;
+         
+      } */
+  .counters {
+    width: 30px;
+    height: 50px;
+    position: absolute;
+    top: -20px;
+
+
+  }
+
+  
+
+</style>
+
+
+<body>
+  <div class="w3-container">
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content">
+        <header class="w3-container w3-teal"> 
+          <span onclick="document.getElementById('id01').style.display='none'" 
+          class="w3-button w3-display-topright">&times;</span>
+          <h2>Leader Board</h2>
+        </header>
+          <div class="w3-container w3-teal">
+            <table class="w3-table w3-striped ">
+              <tr>
+                <th>Player</th>
+                
+                <th>Points</th>
+              </tr>
+              <tr style="color: black;">
+                <td>Player1(pink)</td>
+               <td id="play1">0</td>
+                
+              </tr>
+         
+           
+            </table>
+          </div>
+   
+        <footer class="w3-container w3-teal">
+    <p>Made By:Dhruv Tiwari</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+
+  <audio id="mydice">
+    <source src="diceroll.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="myplayer">
+    <source src="moveplayer.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="myladder">
+    <source src="climbladder.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="mysnake">
+    <source src="snakefood.mp3" preload="auto" type="audio/mpeg">
+  </audio>
+  <audio loop id="myAudio" src="fun-whistle-preview-30s.mp3" preload="auto">
+  </audio loop>
+
+  <!-- dice -->
+  <div class="main">
+    <img src="1.png" alt="" id="img">
+    <button id="btn" onclick="anim()">ROLL DICE</button>
+  </div>
+  <a onclick="document.getElementById('id01').style.display='none'"></a>
+ <div id="leaderboard" >
+ <a  onclick="document.getElementById('id01').style.display='block'"> <img src="leader board.png"   alt="" id="img1"></a>
+ </div>
+</a>
+ <div id="sound">
+<a    onClick="togglePlay()"> <img src="soundbutton.png" alt="" id="img2"></a>
+ </div>
+
+  <div id="counter1p" style="position:absolute;">
+ <img id="counter1" class="counters" src="counter1.png">
+  </div>
+
+  <div id="counter2b" style="position:absolute; visibility:hidden;">
+    <img id="counter2" class="counters" src="counters2.png">
+  </div>
+
+  <div id="counter3o" style="position:absolute; visibility:hidden;">
+    <img id="counter3" class="counters" src="counter3.png">
+  </div>
+
+  <div id="counter4y" style="position:absolute; visibility:hidden;">
+    <img id="counter4" class="counters" src="counter4.png">
+  </div>
+
+
+
+
+  <canvas id="myCanvas" onclick="showCoords(event)" width="650" height="549">
+  </canvas>
+  <div style="display:none;">
+    <img id="snake1" src="snake1.png">
+  </div>
+  <div style="display:none;">
+    <img id="snake2" src="snake2.png">
+  </div>
+  <div style="display:none;">
+    <img id="snake3" src="snake3.png">
+  </div>
+  <div style="display:none;">
+    <img id="snake4" src="snake4.png">
+  </div>
+  <div style="display:none;">
+    <img id="snake5" src="snake5.png">
+  </div>
+  <div style="display:none;">
+    <img id="ladder1" src="ladder1.png">
+  </div>
+  <div style="display:none;">
+    <img id="ladder2" src="ladder2.png">
+    <div style="display:none;">
+      <img id="ladder3" src="ladder3.png">
+      <div style="display:none;">
+        <img id="ladder4" src="ladder4.png">
+        <div style="display:none;">
+          <img id="ladder5" src="ladder5.png">
+        </div>
+   
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+   var c = document.getElementById("myCanvas");
+  var ctx = c.getContext("2d");
+  var count = 1;
+  // positiong of snakes and ladders
+
+
+  function drawboardtiles() {
+
+    for (let index1 = 0; index1 <= c.height - (c.height / 10); index1 = index1 + (c.height / 10)) {
+      for (let index = 0; index <= c.width - (c.width / 10); index = index + (c.width / 10)) {
+        console.log(index + "," + index1);
+        if (count % 3 == 1) {
+          ctx.fillStyle = "#ffcc66";
+          ctx.fillRect(index, index1, c.width / 10, c.height / 10);
+        }
+        else if (count % 3 == 2) {
+          ctx.fillStyle = "#ffff80";
+          ctx.fillRect(index, index1, c.width / 10, c.height / 10);
+        }
+        else {
+          ctx.fillStyle = "#00e680";
+          ctx.fillRect(index, index1, c.width / 10, c.height / 10);
+
+        }
+        count++;
+      }
+    }
+  }
+  var tilesx = [];
+  var tilesy = [];
+  tilesx[0] = 0;
+  tilesy[0] = 0;
+  function shownumbers() {
+
+    count = 100;
+    var i = 1;
+    for (let index1 = 0; index1 <= c.height - (c.height / 10); index1 = index1 + (c.height / 10)) {
+
+      for (let index = 0; index <= c.width - (c.width / 10); index = index + (c.width / 10)) {
+
+        if (i % 2 == 1) {
+          ctx.font = "15px verdana";
+          ctx.fillStyle = "black";
+          ctx.fillText(count, index + 9, index1 + 30);
+          tilesx[count] = index + 9;
+          tilesy[count] = index1 + 30;
+          // ctx.strokeText(count, index + 10, index1 + 30);
+
+        }
+        else if (i % 2 == 0) {
+          console.log(count1);
+          ctx.fillText(count1, index + 9, index1 + 30);
+          // ctx.strokeText(count1, index + 10, index1 + 30);
+          tilesx[count1] = index + 9;
+          tilesy[count1] = index1 + 30;
+          ++count1;
+        }
+        console.log(count);
+        count--;
+
+      } ++i; console.log(i); count1 = count - 9;
+    }
+  }
+
+
+  drawboardtiles();
+  shownumbers();
+
+
+  // setting up position of snakes and ladders
+  var randomizeS = Math.floor(Math.random() * 4);
+  var randomizeL = Math.floor(Math.random() * 4);
+  console.log(randomizeS + "," + randomizeL);
+
+  switch (randomizeL) {
+    case 0:
+      var randomizeLX = [330, 140, 270, 523, tilesx[1]];
+      var randomizeLY = [351, 270, 1, 30, 151];
+      var climbstarts = [0, 15, 3, 65, 49, 20];
+      var climbends = [0, 35, 43, 96, 92, 80];
+
+      break;
+    case 1:
+      randomizeLX = [133, 393, 0, 453, 270];
+      randomizeLY = [1, 1, 201, 0, 301];
+      climbstarts = [0, 78, 54, 21, 53, 5];
+      climbends = [0, 98, 94, 61, 93, 45];
+      break;
+    case 2:
+      randomizeLX = [30, 82, 150, 400, 480];
+      randomizeLY = [30, 300, 0, 0, 150];
+      climbstarts = [0, 80, 2, 63, 54, 13];
+      climbends = [0, 100, 42, 98, 94, 73];
+      break;
+    case 3:
+      randomizeLX = [280, 600, 0, 700, 80];
+      randomizeLY = [100, 700, 50, 0, 170];
+      climbstarts = [0, 56, 658, 60, 5456, 19];
+      climbends = [0, 76, 4782, 81, 9784, 62];
+
+  }
+
+
+  switch (randomizeS) {
+    case 0:
+      var randomizeSX = [tilesx[26] - 10, tilesx[8], tilesx[2] - 20, tilesx[68] - 50, tilesx[36] - 30];
+      var randomizeSY = [tilesy[96] - 30, tilesy[93] + 30, tilesy[61], 0, 301];
+      var eatstart = [0, 95, 88, 59, 72, 36];
+      var eatends = [0, 55, 49, 16, 7, 4];
+      break;
+    case 1:
+      randomizeSX = [tilesx[4], 73, 170, 353, tilesx[8] - 30];
+      randomizeSY = [330, 201, 21, 30, tilesy[51] - 20];
+      eatstart = [0, 37, 59, 84, 68, 48];
+      eatends = [0, 4, 18, 47, 6, 14];
+      break;
+    case 2:
+      randomizeSX = [30, tilesx[8], 150, 270, 400];
+      randomizeSY = [30, tilesy[88] - 50, 0, -50, 300];
+      eatstart = [0, 81, 84, 88, 86, 34];
+      eatends = [0, 59, 55, 49, 16, 7];
+      break;
+    case 3:
+      randomizeSX = [2960, 1150, 0, 500, 80];
+      randomizeSY = [3090, 1560, 250, 0, 170];
+      eatstart = [0, 136, 198, 41, 71, 59];
+      eatends = [0, 105, 157, 4, 8, 22];
+      break;
+    // case 4:
+    //   randomizeSX = [300, 700, 100, 500, 80];
+    //   randomizeSY = [100, 0, 100, 0, 170];
+    //   eatstart=[0,76,700,78,71,59];
+    //   eatends=[0,35,660,25,8,22];
+    //   break;
+    // case 5:
+    //   randomizeSX = [30, 702, 150, 500, 400];
+    //   randomizeSY = [30, 100, 0, 0, 700];
+    //   eatstart=[0,81,700,84,71,5900];
+    //   eatends=[0,59,660,46,8,2222];
+    //   break;
+  }
+
+
+
+  const image = document.getElementById('snake1');
+
+  image.addEventListener('load', e => {
+    ctx.drawImage(image, randomizeSX[0], randomizeSY[0], 150, 250);
+  });
+
+  const image2 = document.getElementById('snake2');
+
+  image2.addEventListener('load', e => {
+    ctx.drawImage(image2, randomizeSX[1], randomizeSY[1], 150, 250);
+  });
+  const image3 = document.getElementById('snake3');
+
+  image3.addEventListener('load', e => {
+    ctx.drawImage(image3, randomizeSX[2], randomizeSY[2], 250, 290);
+  });
+  const image4 = document.getElementById('snake4');
+
+  image4.addEventListener('load', e => {
+    ctx.drawImage(image4, randomizeSX[3], randomizeSY[3], 150, 550);
+  });
+  const image5 = document.getElementById('snake5');
+
+  image5.addEventListener('load', e => {
+    ctx.drawImage(image5, randomizeSX[4], randomizeSY[4], 150, 250);
+  });
+  const image6 = document.getElementById('ladder1');
+
+  image6.addEventListener('load', e => {
+    ctx.drawImage(image6, randomizeLX[0], randomizeLY[0], 50, 150);
+  });
+  const image7 = document.getElementById('ladder2');
+
+  image7.addEventListener('load', e => {
+    ctx.drawImage(image7, randomizeLX[1], randomizeLY[1], 50, 250);
+  });
+  const image8 = document.getElementById('ladder3');
+
+  image8.addEventListener('load', e => {
+    ctx.drawImage(image8, randomizeLX[2], randomizeLY[2], 50, 250);
+
+  });
+  const image9 = document.getElementById('ladder4');
+
+  image9.addEventListener('load', e => {
+    ctx.drawImage(image9, randomizeLX[3], randomizeLY[3], 50, 250);
+
+  });
+  const image10 = document.getElementById('ladder5');
+
+  image10.addEventListener('load', e => {
+
+    ctx.drawImage(image10, randomizeLX[4], randomizeLY[4], 50, 350);
+
+
+
+  });
+  const image11 = document.getElementById('counter1');
+
+  function set(x, y) {
+    image10.addEventListener('load', e => {
+
+      ctx.drawImage(image11, x, y, 30, 50);
+
+
+
+    });
+
+  }
+
+  // for (let index = 0; index < 6; index++) {
+  //   set(tilesx[eatstart[index]], tilesy[eatstart[index]] - 30);
+
+  // }
+  // for (let index = 0; index < 6; index++) {
+  //   set(tilesx[eatends[index]], tilesy[eatends[index]] - 30);
+
+  // }
+  // for (let index = 0; index < 6; index++) {
+  //   set(tilesx[climbstarts[index]], tilesy[climbstarts[index]] - 30);
+
+  // }
+  // for (let index = 0; index < 6; index++) {
+  //   set(tilesx[climbends[index]], tilesy[climbends[index]] - 30);
+
+  // }
+
+  function showCoords(event) {
+    var x = event.clientX;
+    var y = event.clientY;
+
+    console.log(x + " " + y);
+  }
+
+
+
+
+
+    function moveplayer1(x, y) {
+  
+        $("#counter1p").animate({
+          left: x,
+          top: y-10
+        }, 1000);
+    
+    }
+  
+    // var pts = 0;
+    // while (pts < 100) {
+
+    //   console.log(pts);
+
+    //   moveplayer1(tilesx[pts], tilesy[pts]);
+    //   pts = pts + Math.floor(Math.random() * 7);
+
+    // }
+
+
+    // moveplayer2(tilesx[34],tilesy[34]);
+    // moveplayer3(tilesx[40],tilesy[40]-30);
+    // moveplayer4(tilesx[65],tilesy[65]-30);
+    // moveplayer3(tilesx[80],tilesy[80]-30);
+    // moveplayer4(tilesx[75],tilesy[75]-30);
+
+
+
+
+
+
+
+  var pts=[0,0,0,0,0,0];
+   var roll_dice;
+   var player_move;
+   var snake_move;
+   var ladder_move;
+   var turn=[0,]
+ 
+  //  roll_dice = new sound("diceroll.mp3");
+    roll_dice = document.getElementById("mydice");
+    player_move = document.getElementById("myplayer");
+    snake_move = document.getElementById("mysnake");
+    ladder_move=document.getElementById("myladder")
+
+var ct=0;
+
+      function shuffle() {
+    const img = document.getElementById("img");
+    var randomNumber = Math.floor(Math.random() * 6) + 1;
+
+
+    if(ct%1==0){
+      
+    pts[1]+=randomNumber;
+    if(pts[1]>100){
+      pts[1]=100;
+  
+    }
+    console.log(randomNumber);
+    console.log(pts[1]);
+    player_move.play();
+    $("#play1").html("<b>"+pts[1]+"</b>");
+moveplayer1(tilesx[pts[1]],tilesy[pts[1]]);
+for (let index = 1; index < 6; index++) {
+  if(eatstart[index]==pts[1]){
+    snake_move.play();
+   
+    moveplayer1(tilesx[eatends[index]],tilesy[eatends[index]]);
+    pts[1]=eatends[index];
+    $("#play1").html("<b>"+pts[1]+"</b>");
+  }
+  
+}
+for (let index = 1; index < 6; index++) {
+  if(climbstarts[index]==pts[1]){
+    ladder_move.play();
+   
+    moveplayer1(tilesx[climbends[index]],tilesy[climbends[index]]);
+    pts[1]=climbends[index];
+    $("#play1").html("<b>"+pts[1]+"</b>");
+  }
+  
+}
+   
+    img.setAttribute("src", `${randomNumber}.png`);
+}
+
+}
+
+function anim(){
+  ct++;
+
+  roll_dice.play();
+    setTimeout(shuffle, 500);
+    if(pts[1]==100){
+alert("Game Ends")
+
+    }
+    
+    const img = document.getElementById("img");
+    img.setAttribute("src", "dice-anim.gif");
+    
+
+}
+
+
+  var myAudio = document.getElementById("myAudio");
+
+function togglePlay() {
+  return myAudio.paused ? myAudio.play() : myAudio.pause();
+};
+
+</script>
+
+</html>

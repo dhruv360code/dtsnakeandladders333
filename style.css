@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/* body{
+    background-image: radial-gradient(circle at 77% 26%, rgba(175, 175, 175,0.06) 0%,
+     rgba(175, 175, 175,0.06) 4%,transparent 4%, transparent 100%),radial-gradient(circle at 37% 90%, rgba(129, 129, 129,0.06) 0%, rgba(129, 129, 129,0.06) 55%,transparent 55%, transparent 100%),radial-gradient(circle at 7% 92%, rgba(53, 53, 53,0.06) 0%, rgba(53, 53, 53,0.06) 39%,transparent 39%, transparent 100%),radial-gradient(circle at 65% 17%, rgba(128, 128, 128,0.06) 0%, rgba(128, 128, 128,0.06) 60%,transparent 60%, transparent 100%),radial-gradient(circle at 100% 39%, rgba(75, 75, 75,0.06) 0%, rgba(75, 75, 75,0.06) 20%,transparent 20%, transparent 100%),radial-gradient(circle at 92% 34%, rgba(205, 205, 205,0.06) 0%, rgba(205, 205, 205,0.06) 35%,transparent 35%, transparent 100%),radial-gradient(circle at 63% 90%, rgba(98, 98, 98,0.06) 0%, rgba(98, 98, 98,0.06) 62%,transparent 62%, transparent 100%),radial-gradient(circle at 93% 74%, rgba(130, 130, 130,0.06) 0%, rgba(130, 130, 130,0.06) 65%,transparent 65%, transparent 100%),linear-gradient(90deg, rgb(18, 233, 78),rgb(160, 239, 92));
+    background-repeat:no-repeat ;
+     background-size: 100vw 100vh;
+} */
+
+body{
+    
+    background-image: linear-gradient(56deg, rgba(254, 254, 254, 0.05) 0%, rgba(254, 254, 254, 0.05) 69%,rgba(160, 160, 160, 0.05) 69%, rgba(160, 160, 160, 0.05) 100%),linear-gradient(194deg, rgba(102, 102, 102, 0.02) 0%, rgba(102, 102, 102, 0.02) 60%,rgba(67, 67, 67, 0.02) 60%, rgba(67, 67, 67, 0.02) 100%),linear-gradient(76deg, rgba(169, 169, 169, 0.06) 0%, rgba(169, 169, 169, 0.06) 89%,rgba(189, 189, 189, 0.06) 89%, rgba(189, 189, 189, 0.06) 100%),linear-gradient(326deg, rgba(213, 213, 213, 0.04) 0%, rgba(213, 213, 213, 0.04) 45%,rgba(66, 66, 66, 0.04) 45%, rgba(66, 66, 66, 0.04) 100%),linear-gradient(183deg, rgba(223, 223, 223, 0.01) 0%, rgba(223, 223, 223, 0.01) 82%,rgba(28, 28, 28, 0.01) 82%, rgba(28, 28, 28, 0.01) 100%),linear-gradient(3deg, rgba(20, 20, 20, 0.06) 0%, rgba(20, 20, 20, 0.06) 62%,rgba(136, 136, 136, 0.06) 62%, rgba(136, 136, 136, 0.06) 100%),linear-gradient(200deg, rgba(206, 206, 206, 0.09) 0%, rgba(206, 206, 206, 0.09) 58%,rgba(6, 6, 6, 0.09) 58%, rgba(6, 6, 6, 0.09) 100%),linear-gradient(304deg, rgba(162, 162, 162, 0.07) 0%, rgba(162, 162, 162, 0.07) 27%,rgba(24, 24, 24, 0.07) 27%, rgba(24, 24, 24, 0.07) 100%),linear-gradient(186deg, rgba(166, 166, 166, 0.04) 0%, rgba(166, 166, 166, 0.04) 5%,rgba(210, 210, 210, 0.04) 5%, rgba(210, 210, 210, 0.04) 100%),linear-gradient(90deg, rgb(26, 118, 64),rgb(32, 207, 121),rgb(78, 196, 128));
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+.main{
+    display: flex;
+    width: 250px;
+    height: 270px;
+   position: absolute;
+   top:265px;
+   left:660px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+#leaderboard{
+    position: absolute;
+    top:185px;
+    left:790px;
+
+}
+#sound{
+    position: absolute;
+    top:185px;
+    left:700px;
+
+
+}
+#img{
+    width: 150px;
+    height: 150px;
+}
+#img1:hover{
+
+transform: scale(1.1);
+}
+#img2:hover{
+
+transform: scale(1.1);
+}
+#img1{
+    width: 80px;
+    height: 80px;
+}
+#img2{
+    width: 80px;
+    height: 80px;
+}
+
+#btn:hover{
+    border:3px solid rgb(241, 234, 234);
+}
+#btn{
+    width: 150px;
+    height: 30px;
+    margin: 20px;
+    font-size: 1.2rem;
+    word-wrap:row;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 700;color:rgb(241, 234, 234);
+    border:none;
+    cursor: pointer;
+    outline: none;
+    background-color: rgb(3, 126, 30);
+    
+}
+@media  screen and (max-width: 600px) {
+    /*  <meta name="viewport" content="width=device-width, initial-scale=1"> */
+    body{
+        background-image: white;
+    }
+  .main{  position: absolute;
+    top:560px;
+    left:60px;
+  } 
+  #sound{
+      top:560px;
+      left:500px;
+  }
+  #leaderboard{
+      top:560px;
+      left:420px;
+  }
+}
